@@ -1,0 +1,515 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://DATA/SCRIPTS/ENTITIES/PLAYER.gd" type="Script" id=1]
+[ext_resource path="res://DATA/PARTICLE MATERIALS/PLAYER_TRAIL_DEFAULT.tres" type="Material" id=2]
+[ext_resource path="res://DATA/PARTICLE MATERIALS/MORPHS/PLAYER_TRAIL_DEFAULT.tres" type="Material" id=3]
+[ext_resource path="res://DATA/SPRITES/PLAYER.png" type="Texture" id=4]
+[ext_resource path="res://DATA/PARTICLE MATERIALS/PLAYER_MORPH_ANIM.tres" type="Material" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 32 )
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "change_morph"
+length = 2.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 0.25, 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 12, 12 ), Vector2( 4, 4 ), Vector2( 12, 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ANIM:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:smoothing_speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 2.0, 30.0, 2.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:drag_margin_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.2, 0.0, 0.2 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:drag_margin_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.2, 0.0, 0.2 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:drag_margin_right")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.2, 0.0, 0.2 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:drag_margin_bottom")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.2, 0.0, 0.2 ]
+}
+
+[sub_resource type="Animation" id=3]
+
+length = 1.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 0.454084, 4, 1 ),
+"update": 0,
+"values": [ Vector2( 12, 12 ), Vector2( 14, 14 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 4, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ANIM:playback_speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 32 )
+
+[sub_resource type="Animation" id=5]
+
+resource_name = "morph_anim"
+length = 2.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("MORPH:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MORPH/MORPH/PIECE_1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 4, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16, 16 ), Vector2( 64, 64 ), Vector2( 16, 16 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MORPH/MORPH/PIECE_2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 4, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, 16 ), Vector2( -64, 64 ), Vector2( -16, 16 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MORPH/MORPH/PIECE_3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 4, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, -16 ), Vector2( -64, -64 ), Vector2( -16, -16 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MORPH/MORPH/PIECE_4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 4, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16, -16 ), Vector2( 64, -64 ), Vector2( 16, -16 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("MORPH:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.25, 4 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TRAILS/NORMAL:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("TRAILS/ROCKET:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SPR:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("MORPH:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("MORPH_PART:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="PLAYER" type="KinematicBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="COL" type="CollisionShape2D" parent="." index="0"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CAM" type="Camera2D" parent="." index="1"]
+
+anchor_mode = 1
+rotating = true
+current = true
+zoom = Vector2( 12, 12 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Drag Margin", "Smoothing", "Transform" ]
+
+[node name="ANIM" type="AnimationPlayer" parent="CAM" index="0"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/change_morph = SubResource( 2 )
+anims/warp = SubResource( 3 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
+
+[node name="TRAILS" type="Node2D" parent="." index="2"]
+
+editor/display_folded = true
+
+[node name="NORMAL" type="Particles2D" parent="TRAILS" index="0"]
+
+emitting = false
+amount = 150
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -9000, -9000, 18000, 18000 )
+local_coords = false
+draw_order = 0
+process_material = ExtResource( 2 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Transform", "Visibility" ]
+
+[node name="ROCKET" type="Particles2D" parent="TRAILS" index="1"]
+
+position = Vector2( -50, 0 )
+emitting = false
+amount = 300
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -9000, -9000, 18000, 18000 )
+local_coords = false
+draw_order = 0
+process_material = ExtResource( 3 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Transform", "Visibility" ]
+
+[node name="SPR" type="Sprite" parent="." index="3"]
+
+modulate = Color( 1, 0, 0, 1 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="ACTION" type="Label" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -315.0
+margin_top = -174.0
+margin_right = -251.0
+margin_bottom = -160.0
+rect_scale = Vector2( 10, 10 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
+
+[node name="AREA" type="Area2D" parent="." index="5"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 4
+collision_mask = 4
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="COLLISION" type="CollisionShape2D" parent="AREA" index="0"]
+
+shape = SubResource( 4 )
+
+[node name="MORPH" type="Node2D" parent="." index="6"]
+
+editor/display_folded = true
+visible = false
+rotation = 6.28319
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="MORPH" type="Node2D" parent="MORPH" index="0"]
+
+_sections_unfolded = [ "Material", "Visibility" ]
+
+[node name="PIECE_1" type="Sprite" parent="MORPH/MORPH" index="0"]
+
+position = Vector2( 16, 16 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PIECE_2" type="Sprite" parent="MORPH/MORPH" index="1"]
+
+position = Vector2( -16, 16 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PIECE_3" type="Sprite" parent="MORPH/MORPH" index="2"]
+
+position = Vector2( -16, -16 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PIECE_4" type="Sprite" parent="MORPH/MORPH" index="3"]
+
+position = Vector2( 16, -16 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="MORPH_PART" type="Particles2D" parent="." index="7"]
+
+emitting = false
+amount = 300
+lifetime = 4.0
+one_shot = true
+preprocess = 0.0
+speed_scale = 3.5
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -9000, -9000, 18000, 18000 )
+local_coords = true
+draw_order = 0
+process_material = ExtResource( 5 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Time", "Visibility" ]
+
+[node name="MORPH_ANIM" type="AnimationPlayer" parent="." index="8"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 10.0
+anims/morph_anim = SubResource( 5 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
+
+[connection signal="body_entered" from="AREA" to="." method="_on_AREA_body_entered"]
+
+[connection signal="animation_finished" from="MORPH_ANIM" to="." method="_on_MORPH_ANIM_animation_finished"]
+
+
