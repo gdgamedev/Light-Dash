@@ -51,5 +51,5 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Color", "Initial Velocity", "Scale" ]
+_sections_unfolded = [ "Initial Velocity", "Scale" ]
 

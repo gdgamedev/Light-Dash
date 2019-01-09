@@ -74,6 +74,10 @@ func _ready():
 func _process(delta):
 	$"MORPH_PART".speed_scale = 3.5 * (1 / Engine.time_scale)
 	
+	$"TRAILS".modulate = $"SPR".modulate
+	$"MORPH_PART".modulate = $"SPR".modulate
+	$"MORPH/MORPH".modulate = $"SPR".modulate
+	
 	if Input.is_action_just_pressed("die") and die == false and can_move:
 		die()
 	if die and Engine.time_scale == 1 and Input.is_action_just_pressed("restart"):

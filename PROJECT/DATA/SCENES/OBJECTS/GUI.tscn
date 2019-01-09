@@ -83,6 +83,7 @@ playback_speed = 1.0
 anims/fade_in = SubResource( 1 )
 anims/fade_out = SubResource( 2 )
 blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
 
 [node name="SHD_EFFECTS" type="Control" parent="." index="1"]
 
