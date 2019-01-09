@@ -45,7 +45,7 @@ tracks/0/keys = {
 
 render_priority = 0
 shader = ExtResource( 2 )
-shader_param/blursize = 2.5
+shader_param/blursize = 1.5
 shader_param/bluralpha = 0.5
 _sections_unfolded = [ "shader_param" ]
 

@@ -46,7 +46,7 @@ orbit_velocity = 0.1
 orbit_velocity_random = 1.0
 linear_accel = 0.0
 linear_accel_random = 0.0
-radial_accel = -20.0
+radial_accel = 100.0
 radial_accel_random = 0.0
 tangential_accel = 0.0
 tangential_accel_random = 1.0
@@ -54,7 +54,7 @@ damping = 0.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 10.128
+scale = 120.0
 scale_random = 1.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
@@ -146,7 +146,7 @@ editor_draw_drag_margin = false
 [node name="PART" type="Particles2D" parent="." index="1"]
 
 rotation = -1.5708
-emitting = true
+emitting = false
 amount = 200
 lifetime = 3.0
 one_shot = false

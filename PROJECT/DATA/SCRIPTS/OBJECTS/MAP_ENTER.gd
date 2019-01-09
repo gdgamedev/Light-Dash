@@ -20,7 +20,7 @@ func _on_ANIM_animation_finished(anim_name):
 	
 	p.global_position = global_position
 	
-	$"../..".add_child(p)
+	$"../PLAYER".add_child(p)
 	
 	pass # replace with function body
 

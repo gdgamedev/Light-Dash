@@ -23,6 +23,8 @@ var GRV = 1000.0
 var JUMP_FORCE = 800.0
 #velocidade
 var SPD = Vector2(0, 0)
+#velocidade inicial
+var START_SPD = Vector2(0, 0)
 #número de dashes que pode usar
 var dash = 1
 #está morto
@@ -51,14 +53,15 @@ var rot_spd_acc = 10
 var dir = Vector2(1, 0)
 #direção primária
 var prim_dir = Vector2(1, 0)
+#direção inicial
+var start_dir = Vector2(1, 0)
 
 #chamado quando iniciar
 func _ready():
 	get_node("MORPH/MORPH").modulate = get_node("SPR").modulate
 	get_node("MORPH_PART").modulate = get_node("SPR").modulate
 	load_assets()
-	start_point = global_position
-	start_morph = morph
+	spawnpoint()
 	
 	#trail
 	match start_morph:
@@ -107,7 +110,7 @@ func dash(dir):
 		var points = [dash_target.position, position]
 		line.modulate = $"SPR".modulate
 		line.points = points
-		$"../PART".add_child(line)
+		$"../../PART".add_child(line)
 		
 		#pega a direção normalizada
 		dir = (dash_target.global_position - global_position).normalized()
@@ -247,11 +250,11 @@ func move_rocket(delta):
 	
 	#horizontal
 	if dir.x < prim_dir.x:
-		dir.x += 6 * delta
+		dir.x += 10 * delta
 		if dir.x > prim_dir.x:
 			dir.x = prim_dir.x
 	if dir.x > prim_dir.x:
-		dir.x -= 6 * delta
+		dir.x -= 10 * delta
 		if dir.x < prim_dir.x:
 			dir.x = prim_dir.x
 	
@@ -268,12 +271,30 @@ func move_rocket(delta):
 	#rotação
 	look_at(global_position + dir)
 	
-	#motion
-	motion = Vector2(H_MAX_SPD + 100, 0).rotated(rotation)
+	#boost
+	if not Input.is_action_pressed("jump"):
+		#motion
+		motion = Vector2(H_MAX_SPD - 1000, 0).rotated(rotation)
+		$"TRAILS/ROCKET".process_material.scale = 50
+	else:
+		#motion
+		motion = Vector2(H_MAX_SPD - 100, 0).rotated(rotation)
+		$"TRAILS/ROCKET".process_material.scale = 70
 	
 	#move e desliza
 	move_and_slide(motion)
 	pass
+
+#spawnpoint
+func spawnpoint():
+	start_point = global_position
+	start_morph = morph
+	
+	if start_morph == 0:
+		START_SPD = SPD
+	
+	if start_morph == 1:
+		start_dir = dir
 
 #função para morrer
 func die():
@@ -310,7 +331,7 @@ func die():
 		#posição
 		sc.global_position = self.global_position + Vector2(math._rand(-32, 32, true), math._rand(-10, 10, true))
 		#adicionar a cena
-		$"../PART".add_child(sc)
+		$"../../PART".add_child(sc)
 		pass
 	
 	#onda de choque
@@ -318,7 +339,7 @@ func die():
 	var _sc = preload("res://DATA/SCENES/EFFECTS/SHOCKWAVE.tscn").instance()
 	#posição
 	_sc.global_position = self.global_position
-	$"../SHD_EFFECTS".add_child(_sc)
+	$"../../SHD_EFFECTS".add_child(_sc)
 	
 	pass
 
@@ -330,11 +351,12 @@ func respawn():
 	match start_morph:
 		0:
 			$"TRAILS/NORMAL".emitting = true
+			SPD = START_SPD
 		1:
 			$"TRAILS/ROCKET".emitting = true
+			dir = start_dir
+			prim_dir = start_dir
 	
-	#zera a velocidade
-	SPD = Vector2(0, 0)
 	#volta para a posição inicial
 	self.global_position = start_point
 	#volta a ser visível

@@ -2,8 +2,8 @@
 
 [ext_resource path="res://DATA/SCRIPTS/MAPS/HUB.gd" type="Script" id=1]
 [ext_resource path="res://DATA/TILESETs/TEST_ROOM_TLS.tres" type="TileSet" id=2]
-[ext_resource path="res://DATA/SCENES/OBJECTS/WARP_PORTAL.tscn" type="PackedScene" id=3]
-[ext_resource path="res://DATA/SCENES/OBJECTS/MAP_ENTER.tscn" type="PackedScene" id=4]
+[ext_resource path="res://DATA/SCENES/OBJECTS/MAP_ENTER.tscn" type="PackedScene" id=3]
+[ext_resource path="res://DATA/SCENES/OBJECTS/WARP_PORTAL.tscn" type="PackedScene" id=4]
 [ext_resource path="res://DATA/SCENES/OBJECTS/GUI.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Gradient" id=1]
@@ -118,24 +118,28 @@ h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material" ]
 
-[node name="PORTALS" type="Node2D" parent="." index="2"]
+[node name="MAP_ENTER" parent="." index="2" instance=ExtResource( 3 )]
 
-[node name="WARP_PORTAL" parent="PORTALS" index="0" instance=ExtResource( 3 )]
+position = Vector2( 3804, 4109 )
+
+[node name="PORTALS" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
+
+[node name="WARP_PORTAL" parent="PORTALS" index="0" instance=ExtResource( 4 )]
 
 position = Vector2( 612, 4079 )
 scene_id = 1
 
-[node name="MAP_ENTER" parent="PORTALS" index="1" instance=ExtResource( 4 )]
+[node name="PLAYER" type="Node2D" parent="." index="4"]
 
-position = Vector2( 3804, 4109 )
+[node name="PART" type="Node2D" parent="." index="5"]
 
-[node name="PART" type="Node2D" parent="." index="3"]
+[node name="SHD_EFFECTS" type="Node2D" parent="." index="6"]
 
-[node name="SHD_EFFECTS" type="Node2D" parent="." index="4"]
+[node name="MISC" type="Node2D" parent="." index="7"]
 
-[node name="MISC" type="Node2D" parent="." index="5"]
-
-[node name="GUI" parent="." index="6" instance=ExtResource( 5 )]
+[node name="GUI" parent="." index="8" instance=ExtResource( 5 )]
 
 [connection signal="transition_finished" from="GUI" to="PORTALS/WARP_PORTAL" method="_on_GUI_transition_finished"]
 

@@ -16,6 +16,8 @@ func _on_AREA_body_entered(body):
 		body.get_node("CAM/ANIM").play("change_morph")
 		game.change_game_spd(2, 0.9)
 		body.morph = morph_id
+		
+		body.spawnpoint()
 	pass # replace with function body
 	
 	

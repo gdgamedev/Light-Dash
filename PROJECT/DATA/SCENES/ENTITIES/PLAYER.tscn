@@ -288,7 +288,7 @@ tracks/10/keys = {
 "values": [ true ]
 }
 
-[node name="PLAYER" type="KinematicBody2D" index="0"]
+[node name="PLAYER" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -341,8 +341,6 @@ blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
 [node name="TRAILS" type="Node2D" parent="." index="2"]
-
-editor/display_folded = true
 
 [node name="NORMAL" type="Particles2D" parent="TRAILS" index="0"]
 
