@@ -11,8 +11,47 @@ var time_start
 var duration_ms
 var start_value
 
+#chamado quando iniciado
 func _ready():
-	OS.window_maximized = true
+	display_message()
+	pass
+
+#função para exibir mensagem
+func display_message():
+	print("")
+	print("")
+	print("")
+	print("------------------------------------------ATENTION!!---------------------------------------------------------")
+	print("")
+	print("--ENGLISH--")
+	print("")
+	print("hello user, this window will be used to display what is happening in-game (please don't close it),")
+	print("if somehow you found a bug, please see the messages that is displaying and")
+	print("report on the issue tab of the GitHub: https://github.com/gdgamedev/Light-Dash/issues")
+	print("this window will be remove in next major update, replacing for log files.")
+	print("")
+	print("thanks! =)")
+	print("")
+	print("ASS: Gabriel Henrique")
+	print("")
+	print("")
+	print("------------------------------------------ATENÇÃO!!----------------------------------------------------------")
+	print("")
+	print("--PORTUGUÊS--")
+	print("")
+	print("olá usuário, essa janela vai ser usado para mostrar o que está acontecendo no jogo (por favor não feche-o),")
+	print("se de alguma forma você encontrou um bug, por favor veja as mensagens que estão")
+	print("aparecendo e reporte-o na aba de problemas no GitHub: https://github.com/gdgamedev/Light-Dash/issues")
+	print("essa janela será removida no próximo grande atualização, substituindo por arquivos de log.")
+	print("")
+	print("obrigado! =)")
+	print("")
+	print("ASS: Gabriel Henrique")
+	print("")
+	print("-------------------------------------------------------------------------------------------------------------")
+	print("")
+	print("")
+	print("")
 
 #função para mudar a velocidade do jogo
 func change_game_spd(duration = 0.4, strength = 0.9):

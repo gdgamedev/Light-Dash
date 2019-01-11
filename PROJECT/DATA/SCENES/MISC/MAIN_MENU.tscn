@@ -5,18 +5,18 @@
 [ext_resource path="res://DATA/SCENES/OBJECTS/DEMO/GUI_DEMO.tscn" type="PackedScene" id=3]
 [ext_resource path="res://DATA/SCENES/OBJECTS/DEMO/MORPH_GATE_DEMO.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 
 offsets = PoolRealArray( 0, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=3]
+[sub_resource type="GradientTexture" id=2]
 
 flags = 4
-gradient = SubResource( 2 )
+gradient = SubResource( 1 )
 width = 2048
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=3]
 
 render_priority = 0
 trail_divisor = 1
@@ -46,7 +46,7 @@ angle = 0.0
 angle_random = 0.0
 scale = 30.0
 scale_random = 1.0
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -56,7 +56,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Emission Shape", "Scale" ]
 
-[node name="ROOT" type="Node" index="0"]
+[node name="ROOT" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -76,7 +76,7 @@ fract_delta = true
 visibility_rect = Rect2( -9000, -9000, 18000, 18000 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )
 texture = null
 normal_map = null
 h_frames = 1

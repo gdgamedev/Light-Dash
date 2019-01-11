@@ -63,6 +63,8 @@ func _ready():
 	load_assets()
 	spawnpoint()
 	
+	get_node("SPR").modulate = store_data.data.player_color
+	
 	#trail
 	match start_morph:
 		0:
@@ -107,6 +109,9 @@ func dash(dir):
 	elif dash_target != null:
 		#animação do node de dash
 		dash_target.get_node("ANIM").play("ULTRA_PULSE")
+		
+		if dash_target.disable_on_dash:
+			dash_target.disabled = true
 		
 		#cria uma linha
 		var line = preload("res://DATA/SCENES/OBJECTS/DASH_TRAIL.tscn").instance()
@@ -207,7 +212,7 @@ func move_normal(delta):
 	
 	#ação de pulo
 	if is_on_floor() and jump:
-		SPD.y = -JUMP_FORCE * game.game_speed
+		SPD.y = -JUMP_FORCE
 	
 	#move o player com a velocidade atual
 	move_and_slide(SPD, Vector2(0, -1))
@@ -379,27 +384,29 @@ func aim_dash():
 	if not is_on_floor():
 		#pega todos os nodes do grupo
 		for i in get_tree().get_nodes_in_group("aimable"):
-			#calcula a distância até ele
-			var dist = global_position.distance_to(i.global_position)
-			#calcula o vetor x da distância
-			var x_dist = (i.global_position - global_position).x
-			if (x_dist < 0 and face < 0) or (x_dist > 0 and face > 0):
-				#caso a distância estiver no range
-				if dist <= aim_dash_range:
-					#objetos no range da mira + 1
-					aimable_obj_in_range += 1
-					#caso o alvo for nulo
-					if dash_target == null:
-						#o alvo é o node
-						dash_target = i
-					#senão
-					else:
-						#calcula a distância a distância até o node já alvo
-						var dist_2 = global_position.distance_to(dash_target.global_position)
-						#e caso a distância do node for menor do que do alvo
-						if dist < dist_2:
+			#caso o node não estiver desativado
+			if not i.disabled:
+				#calcula a distância até ele
+				var dist = global_position.distance_to(i.global_position)
+				#calcula o vetor x da distância
+				var x_dist = (i.global_position - global_position).x
+				if (x_dist < 0 and face < 0) or (x_dist > 0 and face > 0):
+					#caso a distância estiver no range
+					if dist <= aim_dash_range:
+						#objetos no range da mira + 1
+						aimable_obj_in_range += 1
+						#caso o alvo for nulo
+						if dash_target == null:
 							#o alvo é o node
 							dash_target = i
+						#senão
+						else:
+							#calcula a distância a distância até o node já alvo
+							var dist_2 = global_position.distance_to(dash_target.global_position)
+							#e caso a distância do node for menor do que do alvo
+							if dist < dist_2:
+								#o alvo é o node
+								dash_target = i
 	#caso o números de objetos no range for 0
 	if aimable_obj_in_range == 0:
 		#o alvo é nulo

@@ -6,7 +6,6 @@ func _ready():
 func _process(delta):
 	$"AMBIENT".position = $"PLAYER_DEMO".position
 
-
 func _on_GUI_transition_finished():
 	get_tree().change_scene("res://DATA/SCENES/MAPS/HUB.tscn")
 	pass # replace with function body

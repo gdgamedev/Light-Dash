@@ -80,34 +80,11 @@ func _process(delta):
 		$"CAM/ANIM".play("warp")
 		$"..".get_node("GUI/TRANSITION/ANIM").play("fade_in")
 	
-	
 	$"TRAILS".modulate = $"SPR".modulate
 	$"MORPH_PART".modulate = $"SPR".modulate
 	$"MORPH/MORPH".modulate = $"SPR".modulate
 	
 	$"MORPH_PART".speed_scale = 3.5 * (1 / Engine.time_scale)
-	
-	if $"..".get_node("GUI/TRANSITION").color.a <= 0.1 and Input.is_action_just_pressed("ui_accept"):
-		warp = true
-		#$"CAM/ANIM".play("warp")
-		
-		$"..".get_node("GUI/GAME_START").play("start")
-		
-		get_node("COLOR_TW").interpolate_property(
-			$"SPR",
-			"modulate",
-			$"SPR".modulate,
-			Color(0.0, 0.97647058823529411764705882352941, 1.0, 1.0),
-			1,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_IN)
-		get_node("COLOR_TW").start()
-		
-		get_node("MORPH_ANIM").play("morph_anim")
-		morph = 0
-		
-		#$"..".get_node("GUI/TRANSITION/ANIM").play("fade_in")
-		pass
 	
 	if can_move:
 		if morph == 0:
@@ -116,6 +93,23 @@ func _process(delta):
 			move_rocket(delta)
 	
 	
+
+#função para começar o jogo
+func game_start():
+	warp = true
+
+	get_node("COLOR_TW").interpolate_property(
+		$"SPR",
+		"modulate",
+		$"SPR".modulate,
+		store_data.data.player_color,
+		1,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN)
+	get_node("COLOR_TW").start()
+
+	get_node("MORPH_ANIM").play("morph_anim")
+	morph = 0
 
 #função para carregar elementos antes de serem usados
 func load_assets():
