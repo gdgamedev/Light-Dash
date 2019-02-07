@@ -1,0 +1,254 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://DATA/SCRIPTS/SPLASH SCREEN.gd" type="Script" id=1]
+[ext_resource path="res://DATA/SPRITES/player.png" type="Texture" id=2]
+[ext_resource path="res://DATA/SPRITES/SPLASH SCREEN/_1.png" type="Texture" id=3]
+[ext_resource path="res://DATA/SHADERS/GLOBAL_SHADER.shader" type="Shader" id=4]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "anim"
+length = 5.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SPLASH/SPR:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 0.25, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CAMERA:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6, 2.5 ),
+"transitions": PoolRealArray( 1, 0.25, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -20.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:cam_shake")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:cam_shake_amp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.6, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 70.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SPLASH/SPR/ROT:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.6, 3.4, 3.40016 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 720.0, 1440.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SPLASH/SPR/ROT:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.6, 2.5, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 0.5, 0.5 ), Vector2( 1e-005, 1e-005 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CAMERA:zoom")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.6, 3.4 ),
+"transitions": PoolRealArray( 1, 4, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ), Vector2( 0.5, 0.5 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("GUI/WHITE_SC:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1.6, 4 ),
+"transitions": PoolRealArray( 1, 4, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+
+render_priority = 0
+shader = ExtResource( 4 )
+shader_param/glow_shader = true
+shader_param/glow_alpha = 1.0
+shader_param/glow_size = 3.0
+shader_param/blur_shader = null
+shader_param/blur_size = null
+shader_param/glitch_shader = false
+shader_param/glitch_x = null
+shader_param/glitch_y = null
+_sections_unfolded = [ "shader_param" ]
+
+[node name="SPLASH SCREEN" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+cam_shake = true
+cam_shake_amp = 70.0
+
+[node name="CAMERA" type="Camera2D" parent="." index="0"]
+
+position = Vector2( 400, 240 )
+rotation = -0.349066
+anchor_mode = 1
+rotating = true
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Drag Margin", "Smoothing", "Transform" ]
+
+[node name="ANIM" type="AnimationPlayer" parent="." index="1"]
+
+root_node = NodePath("..")
+autoplay = "anim"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/anim = SubResource( 1 )
+blend_times = [  ]
+
+[node name="SPLASH" type="Node2D" parent="." index="2"]
+
+position = Vector2( 400, 240 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="SPR" type="Sprite" parent="SPLASH" index="0"]
+
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="ROT" type="Node2D" parent="SPLASH/SPR" index="0"]
+
+rotation = 25.1327
+scale = Vector2( 1e-005, 1e-005 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="_1" type="Sprite" parent="SPLASH/SPR/ROT" index="0"]
+
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="_2" type="Sprite" parent="SPLASH/SPR/ROT" index="1"]
+
+rotation = 2.18166
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="_3" type="Sprite" parent="SPLASH/SPR/ROT" index="2"]
+
+rotation = -2.18166
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="cam_shake" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 0.01
+one_shot = false
+autostart = true
+
+[node name="GUI" type="CanvasLayer" parent="." index="4"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="WHITE_SC" type="ColorRect" parent="GUI" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 800.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+
+[node name="SHAD" type="ColorRect" parent="GUI" index="1"]
+
+material = SubResource( 2 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 800.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Material", "Rect" ]
+
+[connection signal="timeout" from="cam_shake" to="." method="_on_cam_shake_timeout"]
+
+

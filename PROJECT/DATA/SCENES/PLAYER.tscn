@@ -1,0 +1,227 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://DATA/SCRIPTS/PLAYER.gd" type="Script" id=1]
+[ext_resource path="res://DATA/SPRITES/player.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0, 0.84, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "anim"
+length = 1.0
+loop = false
+step = 0.1
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="Gradient" id=5]
+
+offsets = PoolRealArray( 0, 0.455621, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.784314, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+
+flags = 4
+gradient = SubResource( 5 )
+width = 2048
+
+[sub_resource type="Curve" id=7]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+
+flags = 4
+width = 2048
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 40, 0 )
+initial_velocity = 30.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 20.0
+scale_random = 1.0
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Emission Shape", "Gravity", "Initial Velocity", "Scale", "Spread" ]
+
+[node name="PLAYER" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+ACC = 500.0
+MAX_SPD_H = 1000.0
+MAX_SPD_V = 1000.0
+GRV = 300.0
+FRICTION = 100.0
+JUMP_FORCE = 200.0
+DASH_FORCE = 1.0
+TURN_SPD = 1000
+ROCKET_SPD = 1000
+trail_size = 16
+DASH_NODE_RANGE = 150
+_col = Color( 1, 1, 1, 1 )
+
+[node name="TRAIL" type="Node" parent="." index="0"]
+
+[node name="LINE" type="Line2D" parent="TRAIL" index="0"]
+
+z_index = -1
+points = PoolVector2Array(  )
+width = 16.0
+default_color = Color( 0.425781, 0.521484, 1, 1 )
+gradient = SubResource( 1 )
+texture_mode = 56
+joint_mode = 2
+end_cap_mode = 2
+sharp_limit = 2.0
+round_precision = 8
+_sections_unfolded = [ "Capping", "Visibility", "Z Index" ]
+
+[node name="SPR" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="TRAIL_POS" type="Position2D" parent="SPR" index="0"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="CAM" type="Camera2D" parent="." index="2"]
+
+anchor_mode = 1
+rotating = true
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 8.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+_sections_unfolded = [ "Drag Margin", "Smoothing" ]
+
+[node name="COL" type="CollisionShape2D" parent="." index="3"]
+
+visible = false
+shape = SubResource( 2 )
+
+[node name="ANIMS" type="Node" parent="." index="4"]
+
+editor/display_folded = true
+
+[node name="MORPH" type="AnimationPlayer" parent="ANIMS" index="0"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/anim = SubResource( 3 )
+blend_times = [  ]
+
+[node name="DEATH" type="Area2D" parent="." index="5"]
+
+editor/display_folded = true
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="COL" type="CollisionShape2D" parent="DEATH" index="0"]
+
+shape = SubResource( 4 )
+
+[node name="SMOKE" type="Particles2D" parent="." index="6"]
+
+position = Vector2( 0, 9 )
+rotation = -1.5708
+emitting = true
+amount = 30
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -9000, -9000, 18000, 18000 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 9 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Transform" ]
+
+[connection signal="body_entered" from="DEATH" to="." method="_on_DEATH_body_entered"]
+
+
