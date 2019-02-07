@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://DATA/SCRIPTS/PLAYER.gd" type="Script" id=1]
+[ext_resource path="res://DATA/SPRITES/player.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0, 0.84, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+extents = Vector2( 8, 8 )
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "anim"
+
+[sub_resource type="RectangleShape2D" id=4]
+
+
+[sub_resource type="Gradient" id=5]
+
+offsets = PoolRealArray( 0, 0.455621, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.784314, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 40, 0 )
+initial_velocity = 30.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 20.0
+scale_random = 1.0
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
+
+[node name="PLAYER" type="KinematicBody2D"]
+script = ExtResource( 1 )
+ACC = 500.0
+MAX_SPD_H = 1000.0
+MAX_SPD_V = 1000.0
+FRICTION = 100.0
+DASH_FORCE = 1.0
+trail_size = 16
+
+[node name="TRAIL" type="Node" parent="."]
+
+[node name="LINE" type="Line2D" parent="TRAIL"]
+z_index = -1
+width = 16.0
+default_color = Color( 0.425781, 0.521484, 1, 1 )
+gradient = SubResource( 1 )
+texture_mode = 56
+joint_mode = 2
+end_cap_mode = 2
+
+[node name="SPR" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="TRAIL_POS" type="Position2D" parent="SPR"]
+
+[node name="CAM" type="Camera2D" parent="."]
+rotating = true
+current = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 8.0
+
+[node name="COL" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="ANIMS" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="MORPH" type="AnimationPlayer" parent="ANIMS"]
+anims/anim = SubResource( 3 )
+
+[node name="DEATH" type="Area2D" parent="."]
+editor/display_folded = true
+visible = false
+
+[node name="COL" type="CollisionShape2D" parent="DEATH"]
+shape = SubResource( 4 )
+
+[node name="SMOKE" type="Particles2D" parent="."]
+position = Vector2( 0, 9 )
+rotation = -1.5708
+amount = 30
+visibility_rect = Rect2( -9000, -9000, 18000, 18000 )
+local_coords = false
+process_material = SubResource( 9 )
+
+[connection signal="body_entered" from="DEATH" to="." method="_on_DEATH_body_entered"]

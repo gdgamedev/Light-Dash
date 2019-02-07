@@ -1,0 +1,179 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://DATA/SCRIPTS/SPLASH SCREEN.gd" type="Script" id=1]
+[ext_resource path="res://DATA/SPRITES/player.png" type="Texture" id=2]
+[ext_resource path="res://DATA/SPRITES/SPLASH SCREEN/_1.png" type="Texture" id=3]
+[ext_resource path="res://DATA/SHADERS/GLOBAL_SHADER.shader" type="Shader" id=4]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "anim"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("SPLASH/SPR:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 0.25, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CAMERA:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6, 2.5 ),
+"transitions": PoolRealArray( 1, 0.25, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -20.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:cam_shake")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:cam_shake_amp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.6, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 70.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SPLASH/SPR/ROT:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.6, 3.4, 3.40016 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 720.0, 1440.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SPLASH/SPR/ROT:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.6, 2.5, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 0.5, 0.5 ), Vector2( 1e-005, 1e-005 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CAMERA:zoom")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.6, 3.4 ),
+"transitions": PoolRealArray( 1, 4, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1.5, 1.5 ), Vector2( 0.5, 0.5 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("GUI/WHITE_SC:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1.6, 4 ),
+"transitions": PoolRealArray( 1, 4, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+
+shader = ExtResource( 4 )
+shader_param/glow_shader = true
+shader_param/glow_alpha = 1.0
+shader_param/glow_size = 3.0
+shader_param/blur_shader = null
+shader_param/blur_size = null
+shader_param/glitch_shader = false
+shader_param/glitch_x = null
+shader_param/glitch_y = null
+
+[node name="SPLASH SCREEN" type="Node2D"]
+script = ExtResource( 1 )
+cam_shake = true
+cam_shake_amp = 70.0
+
+[node name="CAMERA" type="Camera2D" parent="."]
+position = Vector2( 400, 240 )
+rotation = -0.349066
+rotating = true
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+
+[node name="ANIM" type="AnimationPlayer" parent="."]
+autoplay = "anim"
+anims/anim = SubResource( 1 )
+
+[node name="SPLASH" type="Node2D" parent="."]
+position = Vector2( 400, 240 )
+
+[node name="SPR" type="Sprite" parent="SPLASH"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+
+[node name="ROT" type="Node2D" parent="SPLASH/SPR"]
+rotation = 25.1327
+scale = Vector2( 1e-005, 1e-005 )
+
+[node name="_1" type="Sprite" parent="SPLASH/SPR/ROT"]
+texture = ExtResource( 3 )
+
+[node name="_2" type="Sprite" parent="SPLASH/SPR/ROT"]
+rotation = 2.18166
+texture = ExtResource( 3 )
+
+[node name="_3" type="Sprite" parent="SPLASH/SPR/ROT"]
+rotation = -2.18166
+texture = ExtResource( 3 )
+
+[node name="cam_shake" type="Timer" parent="."]
+wait_time = 0.01
+autostart = true
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="WHITE_SC" type="ColorRect" parent="GUI"]
+margin_right = 800.0
+margin_bottom = 480.0
+
+[node name="SHAD" type="ColorRect" parent="GUI"]
+material = SubResource( 2 )
+margin_right = 800.0
+margin_bottom = 480.0
+
+[connection signal="timeout" from="cam_shake" to="." method="_on_cam_shake_timeout"]
